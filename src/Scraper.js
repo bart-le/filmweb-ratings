@@ -52,7 +52,8 @@ class Scraper {
 			.map(genres => genres.join(" / "))[0]
 		})));
 
-		console.log(films);
+		const nextPageNumber = parseInt(url.match(/page=(\d+)$/)[1], 10) + 1;
+		console.log(nextPageNumber);
 		return films;
 	}
 

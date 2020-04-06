@@ -52,9 +52,23 @@ class Scraper {
 			.map(genres => genres.join(" / "))[0]
 		})));
 
-		const nextPageNumber = parseInt(url.match(/page=(\d+)$/)[1], 10) + 1;
-		console.log(nextPageNumber);
-		return films;
+		if (films.length) {
+			const nextPageNumber = parseInt(url.match(/page=(\d+)$/)[1], 10) + 1;
+			const nextUrl = `https://www.filmweb.pl${this.username[0]}/films?page=${nextPageNumber}`;
+
+			return films.concat(await this.scrapePage(nextUrl));
+		} else {
+			return films;
+		}
+	}
+
+	async showFilms() {
+		const films = await this.scrapePage(`https://www.filmweb.pl${this.username[0]}/films?page=1`);
+		if (films.length) {
+			console.log(films);
+		} else {
+			console.log("You haven't rated any films so far.");
+		}
 	}
 
 	async goToPage(url) {
@@ -68,7 +82,7 @@ class Scraper {
 	async init() {
 		await this.setBrowser();
 		await this.login(this.username, this.password);
-		await this.scrapePage(`https://www.filmweb.pl${this.username[0]}/films?page=1`);
+		await this.showFilms();
 		await this.closeBrowser();
 	}
 }

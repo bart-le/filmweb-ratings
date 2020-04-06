@@ -90,7 +90,6 @@ class Scraper {
 		await this.setBrowser();
 		await this.login(this.username, this.password);
 		await this.showFilms();
-		await this.closeBrowser();
 	}
 }
 

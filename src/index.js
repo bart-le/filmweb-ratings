@@ -12,6 +12,7 @@ const [usernameOrEmail, password] = params;
 		} catch (e) {
 			console.log("Invalid credentials.");
 		}
+		await scraper.closeBrowser();
 	} else {
 		console.log("Try again using two parameters. First as login and second as your password.")
 	}

@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const fs = require("fs");
 
 class Scraper {
 	browser;
@@ -10,7 +11,7 @@ class Scraper {
 	}
 
 	async setBrowser() {
-		this.browser = await puppeteer.launch({ headless: false });
+		this.browser = await puppeteer.launch({ headless: true });
 		this.page = await this.browser.newPage();
 		const pages = await this.browser.pages();
 		pages[0].close();
@@ -65,7 +66,13 @@ class Scraper {
 	async showFilms() {
 		const films = await this.scrapePage(`https://www.filmweb.pl${this.username[0]}/films?page=1`);
 		if (films.length) {
-			console.log(films);
+			fs.writeFileSync("films.json", JSON.stringify(films, null, 2), (error) => {
+				if (error) throw error;
+			});
+
+			const filmsJson = fs.readFileSync("films.json");
+			const parsedFilms = JSON.parse(filmsJson);
+			console.log(parsedFilms);
 		} else {
 			console.log("You haven't rated any films so far.");
 		}

@@ -1,0 +1,22 @@
+{
+  "name": "filmweb-ratings",
+  "version": "1.0.0",
+  "description": "Puppeteer scraper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bart-le/filmweb-ratings.git"
+  },
+  "author": "Bart Le",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bart-le/filmweb-ratings/issues"
+  },
+  "homepage": "https://github.com/bart-le/filmweb-ratings#readme",
+  "dependencies": {
+    "puppeteer": "^2.1.1"
+  }
+}
